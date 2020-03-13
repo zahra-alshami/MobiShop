@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using MobiShop.Models;
 using MobiShop.Views;
 using MobiShop.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace MobiShop.Views
 {
@@ -20,6 +21,7 @@ namespace MobiShop.Views
     {
         ItemsViewModel viewModel;
 
+        public ObservableCollection<Item> phones { set; get; }
         public ItemsPage()
         {
             InitializeComponent();
@@ -27,7 +29,10 @@ namespace MobiShop.Views
                 "CarouselView_Experimental",
                 "IndicatorView_Experimental"
             });
-
+            phones = new ObservableCollection<Item>();
+            phones.Add(new Item {ImageUrl="j4.jpg",Text="j4",Description="this is a description"});
+            phones.Add(new Item { ImageUrl = "j7.jpg", Text = "j7", Description = "this is a description" });
+            ItemsListView.ItemsSource = phones;
             BindingContext = viewModel = new ItemsViewModel();
       Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
       {
